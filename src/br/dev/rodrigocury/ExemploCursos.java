@@ -1,8 +1,7 @@
 package br.dev.rodrigocury;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ExemploCursos {
 
@@ -20,6 +19,20 @@ public class ExemploCursos {
 
         System.out.println(cursos.stream().filter(c -> c.getAlunos() > 150).count());
         System.out.println(cursos.stream().mapToInt(Curso::getAlunos).sum());
+
+        Optional<Curso> optionalCurso = cursos.stream().filter(ExemploCursos::filtra).findAny();
+
+        System.out.println(optionalCurso.orElse(null));
+
+        cursos.stream().collect(Collectors.toMap(Curso::getNome, Curso::getAlunos)).forEach((s , i) -> {
+            System.out.println(String.format("Curso %s têm %d alunos", s, i));
+        });
+
+        optionalCurso.ifPresent(System.out::println);
+    }
+
+    static boolean filtra(Curso c){
+        return c.getAlunos() > 1000;
     }
 }
 
