@@ -16,9 +16,8 @@ public class OrdenaStrings {
         palavras.add("Oa");
 //        Collections.sort(palavras, new ComparadorPorTamanho());
 //        palavras.sort(new ComparadorPorTamanho());
-        palavras.sort((s1, s2) -> {
-            return s1.length() - s2.length();
-        });
+//        palavras.sort((s1, s2) -> s1.length() - s2.length());
+        palavras.sort(Comparator.comparingInt(String::length));
 
         System.out.println(palavras);
 
